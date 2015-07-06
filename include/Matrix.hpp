@@ -9,13 +9,12 @@
 #include <fstream>
 #include <iostream>
 
-
 using namespace std;
 
 class Matrix{
 private:
+	float tolerance = 0.000001;
 	bool order1(pair<int,int>p1,pair<int,int>p2);
-	float detHelper(vector<int> rows, vector<int> cols);
 public:
 	enum matTypes{RANDOM,IDENTITY,ZERO};
 	/**
@@ -60,6 +59,7 @@ public:
 	Matrix(float** dense,int N,int M);
 	Matrix(int N, int M, matTypes T);
 	Matrix();
+	Matrix(const Matrix &obj);
 
 	~Matrix();
 	/**
@@ -81,20 +81,21 @@ public:
 	void scaleRow(int r,float k);
 	void augment(Matrix* m);
 	bool isSymetric();
-	float determinant();
+	double determinant();
 	int getRank();
 	void printMatrix(string s);
 	void random(int maxMod);
-
-	// Matrix retAugment();
-	// Matrix mult(Matrix m);
-	// Matrix exp(int n);
-	// Matrix add(Matrix m);
-	// Matrix scale(float c);
-	// Matrix transpose();
-	// Matrix inverse();
-	// Matrix RRE();
-	// Matrix Cholesky();
+	//&L &U &P
+	vector<Matrix*> LUP();
+	// Matrix* retAugment();
+	Matrix* mult(Matrix* m);
+	// Matrix* exp(int n);
+	// Matrix* add(Matrix m);
+	// Matrix* scale(float c);
+	// Matrix* transpose();
+	// Matrix* inverse();
+	// Matrix* RRE();
+	// Matrix* Cholesky();
 
 };
 
